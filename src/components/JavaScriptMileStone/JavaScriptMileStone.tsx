@@ -3,37 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
-const useStyles = makeStyles({
-  root: {
-    marginTop: '2rem',
-  },
-  pointsContainer: {
-    borderTop: '1px solid #115293',
-    display: 'flex',
-  },
-  pointsWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  circleSvg: {
-    fill: '#115293',
-    position: 'absolute',
-  },
-  year: {
-    fontSize: '1.4rem',
-  },
-  arrowIcon: {
-    height: '2.5rem',
-    transform: 'scale(0.5, 1)',
-  },
-  content: {
-    color: '#115293',
-    fontSize: '1.1rem',
-  },
-});
-
 const javascriptMileStones = [
   { year: 1996, mileStones: ['JavaScript'] },
   { year: 1997, mileStones: ['EcmaScript'] },
@@ -46,6 +15,39 @@ const javascriptMileStones = [
   { year: 2014, mileStones: ['Vue.js'] },
   { year: 2015, mileStones: ['ES6', 'Edge'] },
 ];
+
+const useStyles = makeStyles({
+  root: {
+    marginTop: '2rem',
+  },
+  pointsContainer: {
+    borderTop: '1px solid #115293',
+    display: 'flex',
+    minWidth: 135 * javascriptMileStones.length,
+  },
+  pointsWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'relative',
+    minWidth: 135,
+  },
+  circleSvg: {
+    fill: '#115293',
+    position: 'absolute',
+  },
+  year: {
+    fontSize: '1.7rem',
+  },
+  content: {
+    color: '#115293',
+    fontSize: '1.4rem',
+  },
+  arrowIcon: {
+    height: '2.5rem',
+    transform: 'scale(0.5, 1)',
+  },
+});
 
 export default function JavaScriptMileStone(): JSX.Element {
   const classes = useStyles();
