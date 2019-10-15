@@ -8,6 +8,7 @@
     "build": "webpack --config config/webpack.prod.js",
     "lint": "eslint ./**/*",
     "storybook": "start-storybook",
+    "build-storybook": "build-storybook",
     "test": "jest"
   },
   "keywords": [],
