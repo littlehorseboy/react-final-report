@@ -12,7 +12,7 @@ export interface JavascriptMileStone {
 
 const javascriptMileStones: JavascriptMileStone[] = [
   { year: 1996, mileStones: ['JavaScript'] },
-  { year: 1997, mileStones: ['EcmaScript'] },
+  { year: 1997, mileStones: ['ECMAScript'] },
   { year: 2004, mileStones: ['Firefox'] },
   { year: 2006, mileStones: ['jQuery'] },
   { year: 2008, mileStones: ['V8', 'Chrome'] },
