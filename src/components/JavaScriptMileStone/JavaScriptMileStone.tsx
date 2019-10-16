@@ -2,28 +2,16 @@ import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-
-const javascriptMileStones = [
-  { year: 1996, mileStones: ['JavaScript'] },
-  { year: 1997, mileStones: ['EcmaScript'] },
-  { year: 2004, mileStones: ['Firefox'] },
-  { year: 2006, mileStones: ['jQuery'] },
-  { year: 2008, mileStones: ['V8', 'Chrome'] },
-  { year: 2009, mileStones: ['ES5', 'Node.js'] },
-  { year: 2010, mileStones: ['npm', 'Angular'] },
-  { year: 2013, mileStones: ['React'] },
-  { year: 2014, mileStones: ['Vue.js'] },
-  { year: 2015, mileStones: ['ES6', 'Edge'] },
-];
+import { JavascriptMileStone } from './JavaScriptMileStone.stories';
 
 const useStyles = makeStyles({
   root: {
-    marginTop: '2rem',
+    marginTop: '5rem',
   },
   pointsContainer: {
     borderTop: '1px solid #115293',
     display: 'flex',
-    minWidth: 135 * javascriptMileStones.length,
+    minWidth: (props: PropsI): number => 145 * props.javascriptMileStones.length,
   },
   pointsWrapper: {
     display: 'flex',
@@ -49,8 +37,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function JavaScriptMileStone(): JSX.Element {
-  const classes = useStyles();
+interface PropsI {
+  javascriptMileStones: JavascriptMileStone[];
+}
+
+export default function JavaScriptMileStone(props: PropsI): JSX.Element {
+  const classes = useStyles(props);
+
+  const { javascriptMileStones } = props;
 
   const [width, setWidth] = useState(0);
 
