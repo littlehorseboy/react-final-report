@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>react-final-report</title>
+  <style>
+    .inputContainer {
+      background-color: #EEEEEE;
+      padding: 1rem;
+    }
+    .resultContainer {
+      background-color: #DDDDDD;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="inputContainer">
+    <div>
+      商品名稱：
+      <input id="inputName" />
+    </div>
+    <div>
+      價錢：
+      <input id="inputPrice" />
+    </div>
+  </div>
+
+  <div class="resultContainer">
+    <div>
+      商品名稱：
+      <span id="name"></span>
+    </div>
+    <div>
+      價錢：
+      <span id="price"></span>
+    </div>
+  </div>
+
+  <script>
+    const inputName = document.querySelector('#inputName');
+    const name = document.querySelector('#name');
+
+    inputName.addEventListener('input', (event) => {
+      name.textContent = event.target.value;
+    });
+
+    const inputPrice = document.querySelector('#inputPrice');
+    const price = document.querySelector('#price');
+
+    inputPrice.addEventListener('input', (event) => {
+      price.textContent = event.target.value;
+    });
+  </script>
+</body>
+</html>
