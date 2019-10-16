@@ -8,6 +8,5 @@ storiesOf('Products', module)
   .add('Products', () => (
     <>
       <Products />
-      <Products />
     </>
   ));
