@@ -1,11 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: 'absolute',
+    minWidth: 150,
     maxWidth: 500,
     top: 60,
+    '&.hidden': {
+      display: 'none',
+    },
   },
   arrowBox: {
     position: 'relative',
@@ -36,15 +41,15 @@ const useStyles = makeStyles({
     '& > div:first-child': {
       fontSize: '1.5rem',
       fontWeight: 'bold',
-      padding: '2rem',
+      padding: theme.spacing(1, 3),
       textAlign: 'center',
     },
     '& > div:nth-child(2)': {
-      padding: '2rem',
+      padding: theme.spacing(1, 3),
       textAlign: 'center',
     },
     '& > div:nth-child(3)': {
-      padding: '2rem',
+      padding: theme.spacing(1),
       textAlign: 'right',
     },
     '& > div:nth-child(3) > button': {
@@ -53,65 +58,35 @@ const useStyles = makeStyles({
       backgroundColor: 'transparent',
     },
   },
-});
+}));
 
-export default function PopoverContainer(): JSX.Element {
+interface PropsI {
+  open: boolean;
+  title: string;
+  content: string;
+  onClose: () => void;
+}
+
+export default function PopoverContainer(props: PropsI): JSX.Element {
   const classes = useStyles();
 
-  const elRef = useRef<null | HTMLDivElement>(null);
+  const {
+    open, title, content, onClose,
+  } = props;
 
-  useEffect(() => {
-    interface Options {
-      Title: string;
-      Content: string;
-      onApprove: () => void;
-    }
-
-    function showToolTip(el: HTMLDivElement, options: Options): void {
-      el.addEventListener('mouseover', () => {
-        const arrowContainer = document.createElement('div');
-        arrowContainer.className = classes.root;
-        const arrowBox = document.createElement('div');
-        arrowBox.className = classes.arrowBox;
-
-        const firstDiv = document.createElement('div');
-        firstDiv.textContent = options.Title;
-
-        const secondDiv = document.createElement('div');
-        secondDiv.textContent = options.Content;
-
-        const thirdDiv = document.createElement('div');
-        const OKBtn = document.createElement('button');
-        OKBtn.textContent = 'OKay';
-        OKBtn.addEventListener('click', () => {
-          options.onApprove();
-          arrowContainer.remove();
-        });
-
-        thirdDiv.appendChild(OKBtn);
-
-        arrowBox.appendChild(firstDiv);
-        arrowBox.appendChild(secondDiv);
-        arrowBox.appendChild(thirdDiv);
-
-        arrowContainer.appendChild(arrowBox);
-
-        document.body.appendChild(arrowContainer);
-      });
-    }
-
-    if (elRef.current) {
-      showToolTip(elRef.current, {
-        Title: 'This is the title',
-        Content: 'This is the content',
-        onApprove() {
-          alert('before close');
-        },
-      });
-    }
-  }, []);
+  const handleClick = (): void => {
+    onClose();
+  };
 
   return (
-    <div ref={elRef}>Div #abc</div>
+    <div className={classNames(classes.root, { hidden: !open })}>
+      <div className={classes.arrowBox}>
+        <div>{title}</div>
+        <div>{content}</div>
+        <div>
+          <button type="button" onClick={handleClick}>OKay</button>
+        </div>
+      </div>
+    </div>
   );
 }

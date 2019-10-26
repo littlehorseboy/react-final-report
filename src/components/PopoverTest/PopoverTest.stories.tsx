@@ -2,11 +2,11 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 /* eslint-enable */
-import PopoverContainer from './PopoverContainer';
+import PopoverTest from './PopoverTest';
 
-storiesOf('PopoverContainer', module)
-  .add('PopoverContainer', () => (
+storiesOf('PopoverTest', module)
+  .add('PopoverTest', () => (
     <>
-      <PopoverContainer />
+      <PopoverTest />
     </>
   ));
