@@ -14,12 +14,17 @@ export default function SnakeGame(): JSX.Element {
   const canvasRef = useRef<null | HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const speed = 19;
+    const canvasWidth = speed * 25;
+    const canvasHeight = speed * 25;
+
+    let score = 0;
+
     if (canvasRef.current) {
-      canvasRef.current.width = 400;
-      canvasRef.current.height = 400;
+      canvasRef.current.width = canvasWidth;
+      canvasRef.current.height = canvasHeight;
 
       const ctx = canvasRef.current.getContext('2d');
-      let score = 0;
 
       interface Snake {
         x: number;
@@ -31,17 +36,17 @@ export default function SnakeGame(): JSX.Element {
       }
 
       const snake: Snake = {
-        x: 160,
-        y: 160,
-        dx: 16,
+        x: speed * 10,
+        y: speed * 10,
+        dx: speed,
         dy: 0,
         cells: [],
         maxCells: 1,
       };
 
       const apple = {
-        x: 320,
-        y: 320,
+        x: speed * 20,
+        y: speed * 20,
       };
 
       const main = (): void => {
@@ -51,13 +56,13 @@ export default function SnakeGame(): JSX.Element {
           snake.y += snake.dy;
 
           if (snake.x < 0) {
-            snake.x = canvasRef.current.width - 16;
+            snake.x = canvasRef.current.width - speed;
           } else if (snake.x >= canvasRef.current.width) {
             snake.x = 0;
           }
 
           if (snake.y < 0) {
-            snake.y = canvasRef.current.height - 16;
+            snake.y = canvasRef.current.height - speed;
           } else if (snake.y >= canvasRef.current.height) {
             snake.y = 0;
           }
@@ -81,16 +86,16 @@ export default function SnakeGame(): JSX.Element {
             if (cell.x === apple.x && cell.y === apple.y) {
               snake.maxCells += 1;
               score += 1;
-              apple.x = random(0, 25 - 1) * 16;
-              apple.y = random(0, 25 - 1) * 16;
+              apple.x = random(0, 25 - 1) * speed;
+              apple.y = random(0, 25 - 1) * speed;
             }
 
             for (let j = i + 1; j < snake.cells.length; j += 1) {
               const snakeCell = snake.cells[i];
               const snakeCell2 = snake.cells[j];
               if (snakeCell.x === snakeCell2.x && snakeCell.y === snakeCell2.y) {
-                snake.x = 160;
-                snake.y = 160;
+                snake.x = speed * 10;
+                snake.y = speed * 10;
                 snake.cells = [];
                 snake.maxCells = 1;
 
@@ -107,20 +112,20 @@ export default function SnakeGame(): JSX.Element {
 
       document.addEventListener('keydown', (e): void => {
         if (e.keyCode === 37 && snake.dx === 0) {
-          snake.dx = -16;
+          snake.dx = -speed;
           snake.dy = 0;
         }
         if (e.keyCode === 39 && snake.dx === 0) {
-          snake.dx = 16;
+          snake.dx = speed;
           snake.dy = 0;
         }
         if (e.keyCode === 40 && snake.dy === 0) {
           snake.dx = 0;
-          snake.dy = 16;
+          snake.dy = speed;
         }
         if (e.keyCode === 38 && snake.dy === 0) {
           snake.dx = 0;
-          snake.dy = -16;
+          snake.dy = -speed;
         }
       });
 
