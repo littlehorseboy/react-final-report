@@ -15,14 +15,14 @@ export default function SnakeGame(): JSX.Element {
 
   useEffect(() => {
     const speed = 19;
-    const canvasWidth = speed * 25;
-    const canvasHeight = speed * 25;
+    const canvasWidth = 25;
+    const canvasHeight = 25;
 
     let score = 0;
 
     if (canvasRef.current) {
-      canvasRef.current.width = canvasWidth;
-      canvasRef.current.height = canvasHeight;
+      canvasRef.current.width = speed * canvasWidth;
+      canvasRef.current.height = speed * canvasHeight;
 
       const ctx = canvasRef.current.getContext('2d');
 
@@ -86,8 +86,8 @@ export default function SnakeGame(): JSX.Element {
             if (cell.x === apple.x && cell.y === apple.y) {
               snake.maxCells += 1;
               score += 1;
-              apple.x = random(0, 25 - 1) * speed;
-              apple.y = random(0, 25 - 1) * speed;
+              apple.x = random(0, canvasWidth - 1) * speed;
+              apple.y = random(0, canvasHeight - 1) * speed;
             }
 
             for (let j = i + 1; j < snake.cells.length; j += 1) {
